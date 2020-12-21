@@ -59,15 +59,37 @@ for i in files:
 
 entire["total_confirmed"] = pd.to_numeric(entire.total_confirmed, errors='coerce')
 entire["death"]= pd.to_numeric(entire.death, errors='coerce')
+# mortality_rate w/ Greys
+# testing_rate w/ Greens and color bar
+# hosp_rate w/ Peach
 #print(entire.dtypes)
-COLOR = px.colors.sequential.Greys
-COLUMN = 'mortality_rate'
-fig = px.choropleth(entire,  locations='code', scope='usa', color=COLUMN, title='COVID-19 US Data Visualization with '+COLUMN+' rate data', 
+
+### Hospitalization Rate
+COLOR = px.colors.sequential.Peach
+COLUMN = 'hosp_rate'
+fig = px.choropleth(entire,  locations='code', scope='usa', color=COLUMN, title='COVID-19 US Data Visualization with Hospitalization Rate data', 
 color_continuous_scale = COLOR, locationmode="USA-states", hover_name=COLUMN, animation_frame='date')
+
+### Mortality  Rate
+# COLOR = px.colors.sequential.Greys
+# COLUMN = 'mortality_rate'
+# fig = px.choropleth(entire,  locations='code', scope='usa', color=COLUMN, title='COVID-19 US Data Visualization with Mortality Rate data', 
+# color_continuous_scale = COLOR, locationmode="USA-states", hover_name=COLUMN, animation_frame='date')
+
+### Testing Rate
+# COLOR = px.colors.sequential.Greens
+# COLUMN = 'testing_rate'
+# fig = px.choropleth(entire,  locations='code', scope='usa', color='testing_2', title='COVID-19 US Data Visualization with Testing Cases data (per 100000 people)', 
+# color_continuous_scale = COLOR, locationmode="USA-states", hover_name=COLUMN, animation_frame='date')
 # fig.layout.coloraxis['colorbar'] = dict(
 #         title = {'text':COLUMN},
-#         tickvals=[0, 20, 40, 60, 80, 100],
-#         ticktext=[0 ,400, 1600, 3600, 6400, 10000])
+#         tickvals=[0, 28, 56, 84, 112, 141],
+#         ticktext=["0" ,"800", "3100", "7000", "12500", "20000"])
+# fig.layout.coloraxis['cmax'] = 141
+# fig.layout.coloraxis['cmin'] = 0
 
-#fig.write_html('./demo/'+COLUMN+'.html')
+
+fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 200
+fig.write_html('./demo/'+COLUMN+'.html')
 fig.show()
+print("finished")

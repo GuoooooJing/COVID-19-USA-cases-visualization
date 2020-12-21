@@ -114,5 +114,6 @@ for i, n in enumerate(daily_total):
     #fig.layout.sliders[0]['steps'][i]['args'][1]['title_text'] = fig.layout['sliders'][0]['steps'][i]['label'] + '. Today\'s total confirmed is '+ str(n)
     #fig.layout.sliders[0]['steps'][i]['label'] += '. Today\'s total confirmed is '+ str(n)
 
-#fig.write_html('./demo/confirmed.html')
-fig.show()
+fig.write_html('./demo/confirmed.html')
+#fig.show()
+print("finished")
